@@ -1,0 +1,7 @@
+**/*.d.ts
+tmp
+node_modules
+!.config
+!.*.json
+!*.json
+package-lock.json

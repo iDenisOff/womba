@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "@evilmartians/lefthook": "1.4.0",
-    "lerna": "5.4.3"
+    "lerna": "5.4.3",
+    "eslint-config-react-app": "7.0.1",
+    "eslint-config-prettier": "8.5.0"
   }
 }
