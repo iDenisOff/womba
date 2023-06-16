@@ -14,13 +14,13 @@ const RootLayout = () => {
                         Home
                     </NavLink>
                     <NavLink className="header_nav__item" to={Routes.Login}>
-                        Login
+                        Sign In
+                    </NavLink>
+                    <NavLink className="header_nav__item" to={Routes.Registration}>
+                        Sign Up
                     </NavLink>
                     <NavLink className="header_nav__item" to={Routes.Forum}>
                         Forum
-                    </NavLink>
-                    <NavLink className="header_nav__item" to={Routes.Registration}>
-                        Registration
                     </NavLink>
                     <NavLink className="header_nav__item" to={Routes.Rules}>
                         Rules

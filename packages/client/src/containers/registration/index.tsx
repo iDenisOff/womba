@@ -9,6 +9,8 @@ import {
 } from '@utils';
 import React from 'react';
 
+import './styles.scss';
+
 import { TChildrenArguments, withForm, FormControlInputTemplate } from '../form';
 
 type TRegistrationForm = {
@@ -34,9 +36,9 @@ const RenderRegistrationForm: React.FC<RenderRegistrationFormProps> = props => {
         <>
             <FormControlInputTemplate<TRegistrationForm>
                 {...props}
-                placeholder="Имя"
+                placeholder="Enter your name"
                 name="name"
-                title="Имя"
+                title="Name"
                 options={{
                     required: ValidationMessage.Required,
                     validate: nameValidation
@@ -44,9 +46,9 @@ const RenderRegistrationForm: React.FC<RenderRegistrationFormProps> = props => {
             />
             <FormControlInputTemplate<TRegistrationForm>
                 {...props}
-                placeholder="Фамилия"
+                placeholder="Enter your surname"
                 name="surname"
-                title="Фамилия"
+                title="Surname"
                 options={{
                     required: ValidationMessage.Required,
                     validate: nameValidation
@@ -54,7 +56,7 @@ const RenderRegistrationForm: React.FC<RenderRegistrationFormProps> = props => {
             />
             <FormControlInputTemplate<TRegistrationForm>
                 {...props}
-                placeholder="Email"
+                placeholder="Enter your email"
                 name="email"
                 title="Email"
                 options={{
@@ -64,9 +66,9 @@ const RenderRegistrationForm: React.FC<RenderRegistrationFormProps> = props => {
             />
             <FormControlInputTemplate<TRegistrationForm>
                 {...props}
-                placeholder="Телефон"
+                placeholder="Enter your phone"
                 name="phone"
-                title="Телефон"
+                title="Phone"
                 options={{
                     required: ValidationMessage.Required,
                     validate: phoneValidation
@@ -74,9 +76,9 @@ const RenderRegistrationForm: React.FC<RenderRegistrationFormProps> = props => {
             />
             <FormControlInputTemplate<TRegistrationForm>
                 {...props}
-                placeholder="Логин"
+                placeholder="Enter your login"
                 name="login"
-                title="Логин"
+                title="Login"
                 options={{
                     required: ValidationMessage.Required,
                     validate: loginValidation
@@ -84,9 +86,9 @@ const RenderRegistrationForm: React.FC<RenderRegistrationFormProps> = props => {
             />
             <FormControlInputTemplate<TRegistrationForm>
                 {...props}
-                placeholder="Пароль"
+                placeholder="Enter your password"
                 name="password"
-                title="Пароль"
+                title="Password"
                 options={{
                     required: ValidationMessage.Required,
                     validate: passValidation
@@ -97,8 +99,9 @@ const RenderRegistrationForm: React.FC<RenderRegistrationFormProps> = props => {
             />
             <FormControlInputTemplate<TRegistrationForm>
                 {...props}
-                placeholder="Пороль еще раз"
+                placeholder="Enter your password"
                 name="confirmPassword"
+                title="Confirm password"
                 options={{
                     required: ValidationMessage.Required,
                     validate: (val: string) => {
@@ -113,13 +116,15 @@ const RenderRegistrationForm: React.FC<RenderRegistrationFormProps> = props => {
                     type: 'password'
                 }}
             />
-            <Button
-                type="submit"
-                disabled={formState.isSubmitting}
-                className="button--purple w-100"
-            >
-                Зарегистрироваться
-            </Button>
+            <div className="button-container">
+                <Button
+                    type="submit"
+                    disabled={formState.isSubmitting}
+                    className="button--purple w-80"
+                >
+                    Sign Up
+                </Button>
+            </div>
         </>
     );
 };
@@ -129,7 +134,7 @@ export const RegistrationForm = withForm<TRegistrationForm>(
         onValid: onSubmit,
         props: {
             defaultValues: {
-                name: 'Oleg',
+                name: '',
                 surname: '',
                 email: '',
                 phone: '',
