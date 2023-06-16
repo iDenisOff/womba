@@ -187,9 +187,8 @@ module.exports = {
       files: ['**/*.json', '*.json', '**/.*.json', '.*.json'],
       rules: {
         quotes: ['error', 'double'],
-        semi: [2, 'always'],
         '@typescript-eslint/semi': 'off',
-        indent: ['error', 2],
+        indent: ['error', 4],
         'no-unused-expressions': 'off',
         '@typescript-eslint/comma-dangle': ['error', 'never'],
         'quote-props': ['error', 'always']
