@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { FormControlInputTemplate, TChildrenArguments, withForm } from '../form';
 import { Routes } from '../Router';
 
+import './styles.scss';
+
 type TLoginForm = {
     login: string;
     password: string;
@@ -23,10 +25,15 @@ const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
 
     return (
         <>
+            <FormControl className="text">
+                <span>
+                    You can <Link to={Routes.Registration}>register here!</Link>
+                </span>
+            </FormControl>
             <FormControlInputTemplate<TLoginForm>
                 {...props}
-                title="Логин"
-                placeholder="Логин"
+                title="Login"
+                placeholder="Enter your login"
                 name="login"
                 options={{
                     required: ValidationMessage.Required
@@ -34,8 +41,8 @@ const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
             />
             <FormControlInputTemplate<TLoginForm>
                 {...props}
-                title="Пароль"
-                placeholder="Пароль"
+                title="Password"
+                placeholder="Enter your password"
                 name="password"
                 options={{
                     required: ValidationMessage.Required
@@ -44,12 +51,15 @@ const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
                     type: 'password'
                 }}
             />
-            <FormControl>
-                <Link to={Routes.Registration}>У вас нет аккаунта? Регистрация</Link>
-            </FormControl>
-            <Button type="submit" className="button--blue w-100" disabled={formState.isSubmitting}>
-                Авторизоваться
-            </Button>
+            <div className="button-container">
+                <Button
+                    type="submit"
+                    className="button--purple w-80"
+                    disabled={formState.isSubmitting}
+                >
+                    Log In
+                </Button>
+            </div>
         </>
     );
 };

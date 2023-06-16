@@ -113,7 +113,11 @@ const RenderRegistrationForm: React.FC<RenderRegistrationFormProps> = props => {
                     type: 'password'
                 }}
             />
-            <Button type="submit" disabled={formState.isSubmitting} className="button--blue w-100">
+            <Button
+                type="submit"
+                disabled={formState.isSubmitting}
+                className="button--purple w-100"
+            >
                 Зарегистрироваться
             </Button>
         </>
