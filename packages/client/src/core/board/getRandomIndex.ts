@@ -1,5 +1,5 @@
 const getRandomIndex = (upperBoard = 10) => {
-  return Math.floor(Math.random() * upperBoard)
-}
+    return Math.floor(Math.random() * upperBoard);
+};
 
-export default getRandomIndex
+export default getRandomIndex;

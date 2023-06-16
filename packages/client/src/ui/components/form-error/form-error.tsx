@@ -1,11 +1,12 @@
-import React from 'react'
-import classnames from 'classnames'
-import './styles.scss'
+import classnames from 'classnames';
+import React from 'react';
+import './styles.scss';
 
 export const FormError: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
-  className,
-  ...rest
+    className,
+    ...rest
 }) => {
-  const classes = classnames(className, 'form-error')
-  return <div className={classes} {...rest} />
-}
+    const classes = classnames(className, 'form-error');
+
+    return <div className={classes} {...rest} />;
+};

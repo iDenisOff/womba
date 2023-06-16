@@ -1,14 +1,11 @@
 const getColoredValue = ({
-  value,
-  backgroundColor = '#00897b',
+    value,
+    backgroundColor = '#00897b'
 }: {
-  value: string
-  backgroundColor?: string
+    value: string;
+    backgroundColor?: string;
 }) => {
-  return [
-    `%c ${value} `,
-    `background: ${backgroundColor}; color: #fff; border-radius: 2px;`,
-  ]
-}
+    return [`%c ${value} `, `background: ${backgroundColor}; color: #fff; border-radius: 2px;`];
+};
 
-export default getColoredValue
+export default getColoredValue;

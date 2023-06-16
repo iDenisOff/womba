@@ -1,5 +1,5 @@
-import debugResolve from './debugResolve'
+import debugResolve from './debugResolve';
 
-const NAME_LOGGER_BY_DEFAULT = 'global'
+const NAME_LOGGER_BY_DEFAULT = 'global';
 
-export const debug = debugResolve(NAME_LOGGER_BY_DEFAULT)
+export const debug = debugResolve(NAME_LOGGER_BY_DEFAULT);

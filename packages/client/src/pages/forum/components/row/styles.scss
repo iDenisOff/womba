@@ -1,43 +1,43 @@
 .row {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 9.5fr 1.5fr 1fr;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 9.5fr 1.5fr 1fr;
 
-  &_cell {
-    color: #776e65;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #bbada0;
-    border-radius: 20px;
+    &_cell {
+        color: #776e65;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #bbada0;
+        border-radius: 20px;
 
-    &:first-child {
-      cursor: pointer;
-      text-align: left;
-      padding: 10px 20px;
-      background-color: #bbada0;
+        &:first-child {
+            cursor: pointer;
+            text-align: left;
+            padding: 10px 20px;
+            background-color: #bbada0;
+        }
+
+        &:first-child:active {
+            transform: scale(0.97);
+        }
+
+        &:nth-child(2) {
+            display: grid;
+            grid-template-columns: auto min-content;
+        }
+
+        &_button {
+            width: 26px;
+            height: 26px;
+            margin-left: 0;
+            border-radius: 13px;
+            border: none;
+            cursor: pointer;
+            background-color: #bbada0;
+
+            &:active {
+                transform: scale(0.9);
+            }
+        }
     }
-
-    &:first-child:active {
-      transform: scale(0.97);
-    }
-
-    &:nth-child(2) {
-      display: grid;
-      grid-template-columns: auto min-content;
-    }
-
-    &_button {
-      width: 26px;
-      height: 26px;
-      margin-left: 0;
-      border-radius: 13px;
-      border: none;
-      cursor: pointer;
-      background-color: #bbada0;
-
-      &:active {
-        transform: scale(0.9);
-      }
-    }
-  }
 }

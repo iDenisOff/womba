@@ -1,14 +1,14 @@
-import getColoredValue from './getColoredValue'
-import getNameWithTime from './getNameWithTime'
+import getColoredValue from './getColoredValue';
+import getNameWithTime from './getNameWithTime';
 
 const getNameWithTimeColored = ({
-  name,
-  backgroundColor,
+    name,
+    backgroundColor
 }: {
-  name: string
-  backgroundColor: string
+    name: string;
+    backgroundColor: string;
 }) => {
-  return getColoredValue({ backgroundColor, value: getNameWithTime(name) })
-}
+    return getColoredValue({ backgroundColor, value: getNameWithTime(name) });
+};
 
-export default getNameWithTimeColored
+export default getNameWithTimeColored;

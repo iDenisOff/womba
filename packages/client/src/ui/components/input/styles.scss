@@ -1,11 +1,11 @@
 .input {
-  border: 1px solid $black-color;
-  border-radius: .5rem;
-  height: 2rem;
-  padding: .2rem .3rem;
-  width: 100%;
+    border: 1px solid $black-color;
+    border-radius: 0.5rem;
+    height: 2rem;
+    padding: 0.2rem 0.3rem;
+    width: 100%;
 
-  &--error {
-    border-color: $red-color;
-  }
+    &--error {
+        border-color: $red-color;
+    }
 }

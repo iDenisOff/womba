@@ -1,17 +1,17 @@
 .button {
-  border: none;
-  border-radius: .5rem;
-  height: 2rem;
-  padding: .2rem .3rem;
-  cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    height: 2rem;
+    padding: 0.2rem 0.3rem;
+    cursor: pointer;
 
-  &--blue {
-    background-color: $blue-color;
-    color: $white-color;
-  }
+    &--blue {
+        background-color: $blue-color;
+        color: $white-color;
+    }
 
-  &--black {
-    background-color: $black-color;
-    color: $white-color;
-  }
+    &--black {
+        background-color: $black-color;
+        color: $white-color;
+    }
 }

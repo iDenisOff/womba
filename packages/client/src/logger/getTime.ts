@@ -1,5 +1,5 @@
 const getTime = () => {
-  return new Date().toLocaleTimeString()
-}
+    return new Date().toLocaleTimeString();
+};
 
-export default getTime
+export default getTime;

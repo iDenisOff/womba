@@ -1,17 +1,17 @@
 .header {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 9.5fr 1.5fr 1fr;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 9.5fr 1.5fr 1fr;
 
-  &_cell {
-    text-transform: uppercase;
-    color: #776e65;
-    padding: 10px;
-    text-align: center;
+    &_cell {
+        text-transform: uppercase;
+        color: #776e65;
+        padding: 10px;
+        text-align: center;
 
-    &:first-child {
-      text-align: left;
-      padding: 10px 20px;
+        &:first-child {
+            text-align: left;
+            padding: 10px 20px;
+        }
     }
-  }
 }

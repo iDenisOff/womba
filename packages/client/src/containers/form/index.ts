@@ -1,2 +1,2 @@
-export * from './form'
-export * from './input-template'
+export * from './form';
+export * from './input-template';

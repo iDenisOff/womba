@@ -1,24 +1,25 @@
-import React, { useRef, useEffect } from 'react'
-import Game from '../../core/game/Game'
+import React, { useRef, useEffect } from 'react';
+
+import Game from '../../core/game/Game';
 
 type TCanvasProps = {
-  height: string
-  width: string
-}
+    height: string;
+    width: string;
+};
 
 const GameContainer: React.FC<TCanvasProps> = ({ height, width }) => {
-  const canvasRef = useRef(null)
-  const gameRef = useRef<Game | null>(null)
+    const canvasRef = useRef(null);
+    const gameRef = useRef<Game | null>(null);
 
-  useEffect(() => {
-    if (canvasRef.current) {
-      gameRef.current = new Game(canvasRef.current)
-    }
+    useEffect(() => {
+        if (canvasRef.current) {
+            gameRef.current = new Game(canvasRef.current);
+        }
 
-    gameRef.current?.start()
-  }, [])
+        gameRef.current?.start();
+    }, []);
 
-  return <canvas width={width} height={height} ref={canvasRef}></canvas>
-}
+    return <canvas width={width} height={height} ref={canvasRef}></canvas>;
+};
 
-export default GameContainer
+export default GameContainer;

@@ -1,7 +1,7 @@
-import getTime from './getTime'
+import getTime from './getTime';
 
 const getNameWithTime = (name: string) => {
-  return `${name}: ${getTime()}`
-}
+    return `${name}: ${getTime()}`;
+};
 
-export default getNameWithTime
+export default getNameWithTime;
