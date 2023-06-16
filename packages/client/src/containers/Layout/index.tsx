@@ -7,17 +7,29 @@ import './styles.scss';
 const RootLayout = () => {
     return (
         <>
-            <header>
-                <nav className="header-navigation">
-                    <h1>WOMBA 2048</h1>
-                    <NavLink to="/">Home</NavLink>
-                    <NavLink to={Routes.Login}>Login</NavLink>
-                    <NavLink to={Routes.Forum}>Forum</NavLink>
-                    <NavLink to={Routes.Registration}>Registration</NavLink>
-                    <NavLink to={Routes.Rules}>Rules</NavLink>
-                    <NavLink to={Routes.Game}>Game</NavLink>
-                </nav>
-            </header>
+            <div className="header">
+                <div className="header_logo">WOMBA 2048</div>
+                <div className="header_nav">
+                    <NavLink className="header_nav__item" to="/">
+                        Home
+                    </NavLink>
+                    <NavLink className="header_nav__item" to={Routes.Login}>
+                        Login
+                    </NavLink>
+                    <NavLink className="header_nav__item" to={Routes.Forum}>
+                        Forum
+                    </NavLink>
+                    <NavLink className="header_nav__item" to={Routes.Registration}>
+                        Registration
+                    </NavLink>
+                    <NavLink className="header_nav__item" to={Routes.Rules}>
+                        Rules
+                    </NavLink>
+                    <NavLink className="header_nav__item" to={Routes.Game}>
+                        Game
+                    </NavLink>
+                </div>
+            </div>
             <Layout>
                 <Outlet />
             </Layout>

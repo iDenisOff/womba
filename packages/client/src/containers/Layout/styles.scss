@@ -1,5 +1,26 @@
-.header-navigation {
-    a {
-        margin-right: 0.5rem;
+.header {
+    display: grid;
+    grid-template-columns: auto max-content;
+    padding: 12px;
+    background-color: $purple-dark;
+
+    &_logo {
+        line-height: 30px;
+        color: $white-primary;
+        font-size: 20px;
+    }
+
+    &_nav {
+        display: grid;
+        grid-template-columns: repeat(6, max-content);
+        gap: 24px;
+        text-decoration: none;
+
+        &__item {
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 28px;
+            color: $white-primary;
+        }
     }
 }
