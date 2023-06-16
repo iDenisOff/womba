@@ -7,6 +7,7 @@ function getInitialState(): UserState {
         email: null,
         login: null,
         name: null,
+        password: null,
         phone: null,
         surname: null
     };
@@ -18,6 +19,9 @@ export const userSlice = createSlice({
     reducers: {
         setLogin(state, action: PayloadAction<string | null>) {
             state.login = action.payload;
+        },
+        setPassword(state, action: PayloadAction<string | null>) {
+            state.password = action.payload;
         }
     }
 });

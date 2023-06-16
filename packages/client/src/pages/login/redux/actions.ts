@@ -1,3 +1,3 @@
 import { userSlice } from '../slice';
 
-export const { setLogin } = userSlice.actions;
+export const { setLogin, setPassword } = userSlice.actions;

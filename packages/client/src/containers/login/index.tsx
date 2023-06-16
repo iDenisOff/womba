@@ -1,7 +1,9 @@
 import { authController } from '@controllers';
+import { setLogin, setPassword } from '@pages/login/redux/actions';
 import { Button, FormControl } from '@ui/components';
 import { ValidationMessage } from '@utils';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { FormControlInputTemplate, TChildrenArguments, withForm } from '../form';
@@ -23,6 +25,8 @@ const onSubmit = (values: TLoginForm, helpers: RenderLoginFormProps) => {
 const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
     const { formState } = props;
 
+    const dispatch = useDispatch();
+
     return (
         <>
             <FormControl className="text">
@@ -38,6 +42,9 @@ const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
                 options={{
                     required: ValidationMessage.Required
                 }}
+                onChange={e => {
+                    dispatch(setLogin(e.target.value));
+                }}
             />
             <FormControlInputTemplate<TLoginForm>
                 {...props}
@@ -49,6 +56,9 @@ const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
                 }}
                 inputProps={{
                     type: 'password'
+                }}
+                onChange={e => {
+                    dispatch(setPassword(e.target.value));
                 }}
             />
             <div className="button-container">
