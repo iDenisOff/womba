@@ -11,10 +11,11 @@ type TLoginForm = {
     login: string;
     password: string;
 };
+
 type RenderLoginFormProps = TChildrenArguments<TLoginForm>;
+
 const onSubmit = (values: TLoginForm, helpers: RenderLoginFormProps) => {
     authController.signin(values);
-    console.log(values);
 };
 
 const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
@@ -44,7 +45,7 @@ const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
                 }}
             />
             <FormControl>
-                <Link to={Routes.Registration}>У вас нет аккаунта? Регистриация</Link>
+                <Link to={Routes.Registration}>У вас нет аккаунта? Регистрация</Link>
             </FormControl>
             <Button type="submit" className="button--blue w-100" disabled={formState.isSubmitting}>
                 Авторизоваться

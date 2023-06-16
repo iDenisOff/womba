@@ -1,5 +1,6 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
+import Layout from '../../ui/components/Layout';
 import { Routes } from '../Router';
 import './styles.scss';
 
@@ -17,6 +18,9 @@ const RootLayout = () => {
                     <NavLink to={Routes.Game}>Game</NavLink>
                 </nav>
             </header>
+            <Layout>
+                <Outlet />
+            </Layout>
         </>
     );
 };
