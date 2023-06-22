@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import Home from '../Home'
 import Layout from '../Layout'
-import Error from '../Error'
+import Error from '../error'
 import ProfilePage from '@pages/Profile'
 import { Routes } from './routes'
 import { LoginPage } from '@pages/login'

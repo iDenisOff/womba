@@ -9,7 +9,7 @@
       "@pages/*": ["src/pages/*"],
       "@api": ["src/api"],
       "@controllers": ["src/controllers"],
-      "@static": ["src/static"]
+      "@static": ["src/static"],
     },
     "target": "ESNext",
     "useDefineForClassFields": true,
