@@ -26,3 +26,16 @@ export type User = {
 export interface ILoadable {
     fetching: boolean;
 }
+
+export type TOAuthCredentials = {
+    code: string;
+    redirect_uri: string;
+};
+
+export type TOAuthId = {
+    service_id: string | null;
+};
+
+export type TOAuthResult = {
+    reason: string;
+};

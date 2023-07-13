@@ -10,3 +10,7 @@ export function userInitialization(state: RootState) {
 export function getUserAuthorized(state: RootState) {
     return state.user.authorized;
 }
+
+export function getOAuthId(state: RootState) {
+    return state.user.OAuthId.service_id;
+}

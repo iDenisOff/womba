@@ -1,10 +1,11 @@
 import { Anonymous, Protection } from "@containers";
 import { dispatch } from "@redux/store";
-import { loadUser, userInitialization } from "@redux/user";
+import { loadUser, userInitialization, loadOAuthId, loginUserOAuth, getOAuthId } from "@redux/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useSearchParams } from "react-router-dom";
 
+import { DEFAULT_REDIRECT_URI } from "../../consts/auth";
 import Layout from "../../ui/components/Layout";
 import { Routes } from "../router";
 import "./styles.scss";
@@ -13,6 +14,21 @@ const RootLayout = () => {
     useEffect(() => {
         dispatch(loadUser());
     }, [dispatch]);
+
+    const OAuthId = useSelector(getOAuthId);
+
+    useEffect(() => {
+        dispatch(loadOAuthId());
+    }, [dispatch, OAuthId]);
+
+    const [searchParams] = useSearchParams();
+    const code = searchParams.get("code");
+
+    useEffect(() => {
+        if (code) {
+            dispatch(loginUserOAuth({ code: code, redirect_uri: DEFAULT_REDIRECT_URI }));
+        }
+    }, [dispatch, code]);
 
     const fetching = useSelector(userInitialization);
 

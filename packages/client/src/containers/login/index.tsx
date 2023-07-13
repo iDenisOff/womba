@@ -1,10 +1,13 @@
 import { dispatch } from "@redux/store";
-import { loginUser } from "@redux/user";
+import { loginUser, getOAuthId } from "@redux/user";
 import { SigninRequest } from "@types";
 import { Button } from "@ui/components";
 import { ValidationMessage } from "@utils";
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
+import { DEFAULT_REDIRECT_URI } from "../../consts/auth";
 import { FormControlInputTemplate, TChildrenArguments, withForm } from "../form";
 import "./styles.scss";
 
@@ -13,6 +16,8 @@ const options = {
     required: ValidationMessage.Required
 };
 const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
+    const OAuthId = useSelector(getOAuthId);
+
     return (
         <>
             <FormControlInputTemplate<SigninRequest>
@@ -37,6 +42,16 @@ const RenderLoginForm: React.FC<RenderLoginFormProps> = props => {
                     Авторизоваться
                 </Button>
             </div>
+            {OAuthId && (
+                <div className="button-container">
+                    <Link
+                        className="button--purple w-80 button"
+                        to={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${OAuthId}&redirect_uri=${DEFAULT_REDIRECT_URI}`}
+                    >
+                        OAuth
+                    </Link>
+                </div>
+            )}
         </>
     );
 };
