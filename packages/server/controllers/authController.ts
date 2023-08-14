@@ -80,9 +80,9 @@ export const loginController = async (request: Request, response: Response) => {
             const { message } = error;
 
             response.status(403).json({ error: { message } });
+        } else {
+            response.status(403).json({ error: { message: "Unknown error" } });
         }
-
-        response.status(403).json({ error: { message: "Unknown error" } });
     }
 };
 

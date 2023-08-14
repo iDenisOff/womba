@@ -1,4 +1,4 @@
-import { getUserAuthorized } from "@redux/user";
+import { getUserAuthorized, getUser } from "@redux/user";
 import { Children } from "@types";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -8,16 +8,17 @@ import { Routes } from "../router";
 
 export function useProtection() {
     const isAuthorized = useSelector(getUserAuthorized);
+    const user = useSelector(getUser);
 
-    return { isAuthorized };
+    return { isAuthorized, user };
 }
 
 export function withProtection(Component: React.ElementType) {
     return function WrappedComponent(props: any) {
-        const { isAuthorized } = useProtection();
+        const { isAuthorized, user } = useProtection();
 
         if (isAuthorized) {
-            return <Component {...props} />;
+            return <Component {...props} user={user} />;
         }
 
         return <Navigate to={Routes.Login} replace={true} />;

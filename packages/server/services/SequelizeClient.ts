@@ -11,7 +11,7 @@ import User, { userBeforeCreate } from "../models/User";
 const sequelizeOptions: SequelizeOptions = {
     database: dbName,
     dialect: "postgres",
-    host: "postgres",
+    host: "localhost",
     logging: true,
     models: [User, Comment, Post, Reaction, Reply, Theme],
     password: dbPassword,
