@@ -1,29 +1,23 @@
 import { withProtection } from "@containers";
 import React from "react";
 
+import { CreatePost } from "./components/CreatePost";
 import { ForumList } from "./components/ForumList";
+import { ViewPost } from "./components/ViewPost";
 
 import plusIcon from "../../static/plus.svg";
-import { Theme } from "../../types/forum";
 import { ServerErrorPage } from "../500";
 
 import "./styles.scss";
 
 const FORUM_API_BASE_URL = "http://localhost:3001";
 
-const data: Theme[] = [
-    {
-        id: 1,
-        title: "Новые игры"
-    }
-];
-
 export const ForumPage = withProtection(({ user }) => {
     const [isLoading, setIsLoading] = React.useState(false);
+    const [isCreating, setIsCreating] = React.useState(false);
+    const [post, setPost] = React.useState("");
     const [error, setError] = React.useState<string | undefined>(undefined);
     const [forumUser, setForumUer] = React.useState<{ id: string } | null>(null);
-
-    console.log("🚀 ~ file: index.tsx:25 ~ ForumPage ~ forumUser:", forumUser);
 
     React.useEffect(() => {
         const headers = new Headers();
@@ -91,17 +85,24 @@ export const ForumPage = withProtection(({ user }) => {
         return <ServerErrorPage />;
     }
 
+    if (isCreating) {
+        return <CreatePost user={forumUser} setIsCreating={setIsCreating} />;
+    }
+
+    if (!!post) {
+        return <ViewPost postId={post} setPost={setPost} />;
+    }
+
     return (
         <div className="forum">
             <div className="forum__header">
                 <div className="forum__header__cell">Форум</div>
-                <button className="row_cell_button" onClick={() => console.log("onClick")}>
+                <button className="row_cell_button" onClick={() => setIsCreating(true)}>
                     <img src={plusIcon} alt="plus" />
                 </button>
             </div>
-            {data.map(el => (
-                <ForumList {...el} key={el.id} />
-            ))}
+
+            <ForumList setPost={setPost} />
         </div>
     );
 });

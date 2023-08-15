@@ -40,6 +40,7 @@ export const getPost = async (request: Request, response: Response) => {
 };
 export const createPost = async (request: Request, response: Response) => {
     const { content, title } = request.body;
+
     const { user } = response.locals;
 
     try {
