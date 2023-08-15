@@ -1,8 +1,9 @@
 import { withProtection } from "@containers";
 import React from "react";
 
-import { Row } from "./components/row";
+import { ForumList } from "./components/ForumList";
 
+import plusIcon from "../../static/plus.svg";
 import { Theme } from "../../types/forum";
 import { ServerErrorPage } from "../500";
 
@@ -13,51 +14,7 @@ const FORUM_API_BASE_URL = "http://localhost:3001";
 const data: Theme[] = [
     {
         id: 1,
-        title: "Новые игры",
-        themeCount: 222,
-        answerCount: 345
-    },
-    {
-        id: 2,
-        title: "Геймдизайнеры",
-        themeCount: 5,
-        answerCount: 14
-    },
-    {
-        id: 3,
-        title: "Технологии",
-        themeCount: 590,
-        answerCount: 895
-    },
-    {
-        id: 4,
-        title: "Новые игры",
-        themeCount: 222,
-        answerCount: 345
-    },
-    {
-        id: 5,
-        title: "Геймдизайнеры",
-        themeCount: 5,
-        answerCount: 14
-    },
-    {
-        id: 6,
-        title: "Технологии",
-        themeCount: 590,
-        answerCount: 895
-    },
-    {
-        id: 7,
-        title: "Новые игры",
-        themeCount: 222,
-        answerCount: 345
-    },
-    {
-        id: 8,
-        title: "Геймдизайнеры",
-        themeCount: 5,
-        answerCount: 14
+        title: "Новые игры"
     }
 ];
 
@@ -66,10 +23,13 @@ export const ForumPage = withProtection(({ user }) => {
     const [error, setError] = React.useState<string | undefined>(undefined);
     const [forumUser, setForumUer] = React.useState<{ id: string } | null>(null);
 
+    console.log("🚀 ~ file: index.tsx:25 ~ ForumPage ~ forumUser:", forumUser);
+
     React.useEffect(() => {
         const headers = new Headers();
 
-        headers.append("Content-type", "application/json");
+        headers.append("Content-Type", "application/json");
+        headers.append("Accept", "application/json");
 
         const { email } = user;
 
@@ -82,6 +42,7 @@ export const ForumPage = withProtection(({ user }) => {
 
         fetch(`${FORUM_API_BASE_URL}/api/auth/login`, {
             body: JSON.stringify(userData),
+            credentials: "include",
             headers,
             method: "POST"
         })
@@ -92,6 +53,7 @@ export const ForumPage = withProtection(({ user }) => {
                 if (!!apiResponse.error) {
                     return fetch(`${FORUM_API_BASE_URL}/api/auth/signup`, {
                         body: JSON.stringify(userData),
+                        credentials: "include",
                         headers,
                         method: "POST"
                     }).then(response => {
@@ -129,17 +91,16 @@ export const ForumPage = withProtection(({ user }) => {
         return <ServerErrorPage />;
     }
 
-    console.log("🚀 ~ file: index.tsx:69 ~ ForumPage ~ forumUser:", forumUser);
-
     return (
         <div className="forum">
             <div className="forum__header">
-                <div className="forum__header__cell">Форумы</div>
-                <div className="forum__header__cell">Темы</div>
-                <div className="forum__header__cell">Ответы</div>
+                <div className="forum__header__cell">Форум</div>
+                <button className="row_cell_button" onClick={() => console.log("onClick")}>
+                    <img src={plusIcon} alt="plus" />
+                </button>
             </div>
             {data.map(el => (
-                <Row {...el} key={el.id} />
+                <ForumList {...el} key={el.id} />
             ))}
         </div>
     );

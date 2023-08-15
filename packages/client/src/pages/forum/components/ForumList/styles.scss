@@ -13,6 +13,10 @@
         font-size: 18px;
         background-color: $purple-dark;
 
+        &:disabled {
+            pointer-events: none;
+        }
+
         &:first-child {
             cursor: pointer;
             text-align: left;
