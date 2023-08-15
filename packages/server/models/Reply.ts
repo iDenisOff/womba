@@ -35,7 +35,7 @@ class Reply extends Model {
     override id!: number;
 
     @Column({
-        type: DataType.STRING
+        type: DataType.TEXT
     })
     content!: string;
 

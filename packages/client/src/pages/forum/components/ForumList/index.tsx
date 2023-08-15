@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 
 import { Loader } from "../Loader";
 
@@ -11,9 +11,19 @@ const REFETCH_INTERVAL = 10_000;
 
 type TForumList = {
     setPost: (post: string) => void;
+    userId: string | undefined;
+    setIsEditing: (isEditing: boolean) => void;
+    setEditedPostId: (editedPostId: string) => void;
 };
 
-export const ForumList: React.FC<TForumList> = ({ setPost }) => {
+export const ForumList: React.FC<TForumList> = ({
+    setPost,
+    setIsEditing,
+    setEditedPostId,
+    userId
+}) => {
+    const queryClient = useQueryClient();
+
     const { data, isLoading } = useQuery(
         "posts",
         () => {
@@ -29,6 +39,21 @@ export const ForumList: React.FC<TForumList> = ({ setPost }) => {
         }
     );
 
+    const deletePost = (postId: string) => {
+        return fetch(`${FORUM_API_BASE_URL}/api/post/delete_post/${postId}`, {
+            credentials: "include",
+            method: "DELETE"
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then(({ success }) => {
+                if (success) {
+                    queryClient.invalidateQueries({ queryKey: "posts" });
+                }
+            });
+    };
+
     if (isLoading) {
         return <Loader />;
     }
@@ -43,13 +68,39 @@ export const ForumList: React.FC<TForumList> = ({ setPost }) => {
         );
     }
 
-    return data?.posts?.map((post: { id: string; title: string; content: string }) => {
-        return (
-            <div className="row" key={post.id}>
-                <button className="row_cell" onClick={() => setPost(post.id)}>
-                    {post.title}
-                </button>
-            </div>
-        );
-    });
+    return data?.posts?.map(
+        (post: { id: string; userId: string; title: string; content: string }) => {
+            const isShowPostButtons = userId && post.userId === userId;
+
+            return (
+                <div className="row" key={post.id}>
+                    <button className="row_cell" onClick={() => setPost(post.id)}>
+                        {post.title}
+                    </button>
+                    {isShowPostButtons && (
+                        <>
+                            <button
+                                className="row_cell"
+                                onClick={() => {
+                                    setIsEditing(true);
+                                    setEditedPostId(post.id);
+                                }}
+                            >
+                                Редактировать
+                            </button>
+
+                            <button
+                                className="row_cell"
+                                onClick={() => {
+                                    deletePost(post.id);
+                                }}
+                            >
+                                Удалить
+                            </button>
+                        </>
+                    )}
+                </div>
+            );
+        }
+    );
 };

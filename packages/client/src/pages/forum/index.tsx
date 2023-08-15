@@ -15,6 +15,8 @@ const FORUM_API_BASE_URL = "http://localhost:3001";
 export const ForumPage = withProtection(({ user }) => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [isCreating, setIsCreating] = React.useState(false);
+    const [isEditing, setIsEditing] = React.useState(false);
+    const [editedPostId, setEditedPostId] = React.useState("");
     const [post, setPost] = React.useState("");
     const [error, setError] = React.useState<string | undefined>(undefined);
     const [forumUser, setForumUer] = React.useState<{ id: string } | null>(null);
@@ -85,8 +87,16 @@ export const ForumPage = withProtection(({ user }) => {
         return <ServerErrorPage />;
     }
 
-    if (isCreating) {
-        return <CreatePost user={forumUser} setIsCreating={setIsCreating} />;
+    if (isCreating || isEditing) {
+        return (
+            <CreatePost
+                setIsCreating={setIsCreating}
+                setIsEditing={setIsEditing}
+                isCreating={isCreating}
+                isEditing={isEditing}
+                postId={editedPostId}
+            />
+        );
     }
 
     if (!!post) {
@@ -102,7 +112,12 @@ export const ForumPage = withProtection(({ user }) => {
                 </button>
             </div>
 
-            <ForumList setPost={setPost} />
+            <ForumList
+                userId={forumUser?.id}
+                setPost={setPost}
+                setIsEditing={setIsEditing}
+                setEditedPostId={setEditedPostId}
+            />
         </div>
     );
 });
