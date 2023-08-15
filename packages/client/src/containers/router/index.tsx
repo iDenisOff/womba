@@ -13,6 +13,7 @@ import { Routes } from "./routes";
 
 import Error from "../error";
 import Layout from "../Layout";
+
 export const Root = () => (
     <RoutesRoot>
         <Route element={<Layout />}>

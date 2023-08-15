@@ -7,27 +7,26 @@ WORKDIR /app
 
 FROM base as builder
 
-COPY package.json yarn.lock ./
-RUN yarn install --immutable
-
 COPY . .
 RUN yarn lerna bootstrap
-RUN rm -rf /app/packages/server/dist/ && yarn build:server
-
-RUN tar -cf cl.tar /app/packages/client
+RUN rm -rf /app/packages/client/dist/
+RUN rm -rf /app/packages/server/dist/
+RUN yarn build
 
 FROM node:$NODE_VERSION-buster-slim as production
 WORKDIR /app
 RUN apt-get update && apt-get install -y bash tar
-COPY --from=builder /app/packages/server/dist/ /app/
-COPY --from=builder /app/packages/server/package.json /app/package.json
+COPY --from=builder /app/packages/server/dist/ /app/server/dist
+COPY --from=builder /app/packages/client/dist/ /app/client/dist
+COPY --from=builder /app/packages/client/ssr-dist/ /app/client/ssr-dist
+COPY --from=builder /app/packages/server/package.json /app/server/package.json
 COPY --from=builder /app/srv.js .
 
 RUN yarn install --production=true
 
-COPY --from=builder /app/cl.tar .
-RUN tar -xf cl.tar && mv ./app/packages/client ./node_modules
+# COPY --from=builder /app/cl.tar .
+# RUN tar -xf cl.tar && mv ./app/packages/client ./node_modules
 EXPOSE $SERVER_PORT
-
+ENV NODE_ENV production
 # CMD [ "node", "/app/srv.js" ]
-CMD [ "node", "/app/index.js" ]
+CMD [ "node", "/app/server/dist/index.js" ]

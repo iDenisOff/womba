@@ -13,7 +13,8 @@ import { NavLink, Outlet, useSearchParams } from "react-router-dom";
 
 import { DEFAULT_REDIRECT_URI } from "../../consts/auth";
 import Layout from "../../ui/components/Layout";
-import { Routes } from "../router";
+import { Routes } from "../router/routes";
+
 import "./styles.scss";
 
 const RootLayout = () => {

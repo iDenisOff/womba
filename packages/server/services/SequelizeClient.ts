@@ -7,7 +7,7 @@ import Reaction from "../models/Reaction";
 import Reply from "../models/Reply";
 import Theme from "../models/Theme";
 import User, { userBeforeCreate } from "../models/User";
-//
+
 const sequelizeOptions: SequelizeOptions = {
     database: dbName,
     dialect: "postgres",

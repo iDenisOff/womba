@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config({ path: __dirname + `/../../.env` });
+dotenv.config({ path: __dirname + `./../../.env` });
 
 export const isDev = () => process.env.NODE_ENV === "development";
 export const isProduction = () => process.env.NODE_ENV === "production";

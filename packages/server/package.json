@@ -4,8 +4,8 @@
     "description": "",
     "scripts": {
         "build": "NODE_ENV=production rm -rf dist && tsc --p ./tsconfig.prod.json",
-        "preview": "NODE_ENV=production API_URL=https://ya-praktikum.tech/api/v2 node dist/index.js",
-        "dev": "cross-env NODE_ENV=development API_URL=https://ya-praktikum.tech/api/v2 nodemon index.ts",
+        "preview": "NODE_ENV=production POSTGRES_DB=postgres POSTGRES_PORT=5432 POSTGRES_USER=postgres POSTGRES_PASSWORD=postgres API_URL=https://ya-praktikum.tech/api/v2 node dist/index.js",
+        "dev": "cross-env NODE_ENV=production POSTGRES_DB=postgres POSTGRES_PORT=5432 POSTGRES_USER=postgres POSTGRES_PASSWORD=postgres API_URL=https://ya-praktikum.tech/api/v2 nodemon index.ts",
         "lint": "eslint .",
         "format": "prettier --write .",
         "test": "jest ."

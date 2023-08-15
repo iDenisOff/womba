@@ -15,55 +15,36 @@ services:
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
             POSTGRES_USER: ${POSTGRES_USER}
             POSTGRES_DB: ${POSTGRES_DB}
-            POSTGRES_HOST_AUTH_METHOD: password # required for pgadmin
+            POSTGRES_HOST_AUTH_METHOD: password
         volumes:
             - ./tmp/pgdata:/var/lib/postgresql/data
         networks:
             - wombaNet
-              # ipv4_address: ${POSTGRES_IP}
 
-    # pgadmin:
-    #     container_name: pgadmin
-    #     image: dpage/pgadmin4:latest
-    #     restart: always
-    #     environment:
-    #         PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-    #         PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-    #         PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
-    #     ports:
-    #         - "${PGADMIN_EXTERNAL_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}"
-    #     volumes:
-    #         - pgadmin-store:/var/lib/pgadmin
-    #     depends_on:
-    #         postgres:
-    #             condition: service_healthy
-    #     networks:
-    #         wombaNet:
-    #             ipv4_address: ${PGADMIN_IP}
-
-    client:
-        container_name: prakticum-client
-        image: prakticum-client
-        build:
-            context: .
-            dockerfile: Dockerfile.client
-            args:
-                CLIENT_PORT: ${CLIENT_PORT}
-        restart: always
+    nginx:
+        container_name: prakticum-nginx
+        image: cr.yandex/${CONTAINER_REGISTRY_ID}/nginx:latest
+        build: ./nginx
         ports:
-            - "${CLIENT_PORT}:80"
-        environment:
-            - CLIENT_PORT=${CLIENT_PORT}
-            - SERVER_PORT=${SERVER_PORT}
+            - "80:80"
+            - "443:443"
+        expose:
+            - "80"
+            - "443"
+        env_file:
+            - .env
+        volumes:
+            - ./nginx/ssl:/etc/nginx/ssl
+            - ./nginx/logs:/var/log/nginx
+        restart: always
         depends_on:
             - server
         networks:
             - wombaNet
-              # ipv4_address: ${CLIENT_IP}
 
     server:
         container_name: prakticum-server
-        image: prackicum-server
+        image: cr.yandex/${CONTAINER_REGISTRY_ID}/server:latest
         build:
             context: .
             dockerfile: Dockerfile.server
@@ -81,15 +62,7 @@ services:
                 condition: service_healthy
         networks:
             - wombaNet
-              # ipv4_address: ${SERVER_IP}
-
-volumes:
-    pgadmin-store:
 
 networks:
     wombaNet:
         driver: bridge
-        # ipam:
-        #     driver: default
-        #     config:
-        #         - subnet: ${SUBNET}

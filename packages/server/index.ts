@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import { createServer as createViteServer, ViteDevServer } from "vite";
 
-import { isDev, isProduction } from "./env";
+import { isDev, isProduction, dbUser, dbPassword, dbName } from "./env";
 import apiRoutes from "./routes/apiRoutes";
 import connection from "./services/SequelizeClient";
 import { fetchUserData } from "./user";
@@ -24,6 +24,15 @@ async function startServer() {
             origin: "http://localhost:3000"
         })
     );
+  
+    // @ts-ignore
+    app.use(function (req, res, next) {
+        res.setHeader(
+            "Content-Security-Policy",
+            "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; frame-src 'self'; connect-src https://ya-praktikum.tech"
+        );
+        next();
+    });
     app.use(cookieParser());
     app.use(express.json());
     const port = Number(process.env.SERVER_PORT) || 3001;
@@ -103,6 +112,8 @@ async function startServer() {
             }
 
             // 5. Inject the app-rendered HTML into the template.
+            console.log("preloadedState", preloadedState);
+            console.log("JSON preloadedState", JSON.stringify(preloadedState));
             const reduxState = `<script>
           window.__REDUX_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, "\\u003c")}
         </script>`;
@@ -124,9 +135,11 @@ async function startServer() {
     });
 
     try {
+        console.log("connection");
+        console.log("pg", dbUser, dbPassword, dbName);
         await connection.authenticate();
         await connection.sync({ force: true });
-
+        console.log("connection end");
         app.listen(port, () => {
             console.log("process.env", process.env);
 

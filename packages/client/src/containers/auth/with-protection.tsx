@@ -4,7 +4,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import { Routes } from "../router";
+import { Routes } from "../router/routes";
 
 export function useProtection() {
     const isAuthorized = useSelector(getUserAuthorized);

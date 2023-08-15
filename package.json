@@ -12,7 +12,7 @@
         "test": "lerna run test",
         "lint": "lerna run lint",
         "format": "lerna run format",
-        "preview": "lerna run preview"
+        "preview": "cd packages/server && yarn preview"
     },
     "license": "MIT",
     "workspaces": [

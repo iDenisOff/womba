@@ -1,0 +1,27 @@
+ARG NODE_VERSION=16
+ARG SERVER_PORT=3001
+
+FROM node:$NODE_VERSION-buster as base
+
+WORKDIR /app
+
+FROM base as builder
+
+COPY . .
+RUN yarn lerna bootstrap
+RUN rm -rf /app/packages/server/dist/
+RUN rm -rf /app/packages/server/ssr-dist/
+RUN yarn run build
+
+FROM node:$NODE_VERSION-buster-slim as production
+WORKDIR /app
+COPY --from=builder /app/packages/server/dist/ /app/server/dist
+COPY --from=builder /app/packages/client/ssr-dist /app/client/ssr-dist
+COPY --from=builder /app/packages/server/package.json /app/server/package.json
+
+WORKDIR /app/server
+RUN yarn install
+
+EXPOSE $SERVER_PORT
+
+CMD [ "node", "/app/server/dist/index.js" ]

@@ -4,4 +4,4 @@ export * from "./login";
 export * from "./Profile";
 export * from "./error";
 export * from "./auth";
-export * from "./Leaderboard";
+export * from "./leader-board";
