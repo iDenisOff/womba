@@ -69,8 +69,6 @@ export const editPost = async (request: Request, response: Response) => {
 };
 export const deletePost = async (request: Request, response: Response) => {
     const postId = request.params["id"];
-
-    console.log("🚀 ~ file: postController.ts:72 ~ deletePost ~ postId:", postId);
     const { user } = response.locals;
 
     try {

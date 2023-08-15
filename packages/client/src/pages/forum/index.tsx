@@ -65,7 +65,6 @@ export const ForumPage = withProtection(({ user }) => {
                 }
             })
             .catch((error: Error) => {
-                console.log("🚀 ~ file: index.tsx:110 ~ React.useEffect ~ error:", error);
                 setError(error.message);
             })
             .finally(() => {

@@ -42,8 +42,6 @@ export const ViewPost: React.FC<TViewPost> = ({ postId, setPost }) => {
         return <Loader />;
     }
 
-    console.log("🚀 ~ file: index.tsx:16 ~ data:", data);
-
     return (
         <div className="post">
             <div className="title">

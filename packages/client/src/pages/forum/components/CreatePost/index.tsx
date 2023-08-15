@@ -83,8 +83,6 @@ export const CreatePost: React.FC<TCreatePost> = ({
         })[0][1]
         ?.posts.filter(post => post.id === postId)[0];
 
-    console.log("🚀 ~ file: index.tsx:77 ~ formData:", formData);
-
     return (
         <form className="createForm" onSubmit={onSubmit}>
             <label htmlFor="title">Тема</label>
